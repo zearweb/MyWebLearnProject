@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>搜索提示</title>
+</head>
+
+<body>
+  <div>
+    <input type="text" id="ip_search_tips" placeholder="请输入搜索词语" />
+    <ul id="ul_search_tips"></ul>
+  </div>
+
+  <script type="module">
+    import { getJson } from "../AJAX/ajax/AjaxIndex.js";
+
+    const url = "https://www.imooc.com/api/http/search/suggest?words";
+    const ip_search_tips = document.getElementById("ip_search_tips");
+    const ul_search_tips = document.getElementById("ul_search_tips");
+
+    let timer;
+    ip_search_tips.addEventListener("input", (ev) => {
+      if (timer !== null) {
+        clearTimeout(timer);
+      }
+
+      timer = setTimeout(hintSearchTips, 300);
+    });
+
+    const hintSearchTips = () => {
+      let inputValue = ip_search_tips.value.trim();
+      console.log(inputValue);
+      if (inputValue !== "") {
+        const getSuggest = getJson(`${url}=${inputValue}`);
+        getSuggest.then(({ code, content, xhr }) => {
+          let innerContent = "";
+          for (const item of content.data) {
+            innerContent += `<li>${item.word}</li>`;
+          }
+          ul_search_tips.innerHTML = innerContent;
+          ul_search_tips.style.display = "";
+          console.log(code, content, xhr);
+        }).catch(({ code, content, xhr }) => {
+          console.log(code, content, xhr);
+        });
+      } else {
+        ul_search_tips.innerHTML = "";
+        ul_search_tips.style.display = "none";
+      }
+    };
+  </script>
+</body>
+
+</html>

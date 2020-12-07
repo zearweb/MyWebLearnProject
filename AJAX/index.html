@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello Ajax封装库</title>
+</head>
+
+<body>
+  <script type="module">
+    import { ajax, get, getJson, post } from "./ajax/AjaxIndex.js";
+
+      const test_get_url0 = "https://www.imooc.com/api/http/search/suggest";
+      const test_get_url1 = "./404.html";
+      const test_get_url2 = "sdfshjkdfhywui.sdfbsjhdg";
+
+      const test_post_url =
+        "https://www.imooc.com/api/http/json/search/suggest";
+
+      const proGet = getJson(test_get_url0);
+
+      proGet
+        .then(({ code, content, xhr }) => {
+          console.log(code, content);
+        })
+        .catch(({ code, content, xhr }) => {
+          console.log(code, content);
+        });
+
+      // const proPost = post(test_post_url, {
+      //     requestBody: {
+      //         words: "js"
+      //     },
+      //     contentType: "application/json",
+      //     responseType: 'json',
+      // })
+
+      // proPost.then(({ code, content, xhr }) => {
+      //     console.log(code, content);
+      // }).catch(({ code, content, xhr }) => {
+      //     console.log(code, content);
+      // })
+
+      // proPost.xhr.abort();
+      // proPost.xhr.timeout = 10;
+    </script>
+</body>
+
+</html>

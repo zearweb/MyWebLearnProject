@@ -20,7 +20,9 @@ const ajax = (url, options) => {
     const p = new Promise((resolve, reject) => {
         xhr_new = new Ajax(url, {
             ...options,
-            httpSuccess(response, xhr) { resolve({ code: HTTP_SUCCESS, content: response, xhr }); },
+            httpSuccess(response, xhr) {
+                resolve({ code: HTTP_SUCCESS, content: response, xhr });
+            },
             httpError(xhr) { reject({ code: HTTP_ERROR, content: HTTP_ERROR_TEXT, xhr }); },
             error(xhr) { reject({ code: HTTP_ERROR_REQUEST, content: HTTP_ERROR_REQUEST_TEXT, xhr }); },
             about(xhr) { reject({ code: HTTP_ERROR_ABOUT, content: HTTP_ERROR_ABOUT_TEXT, xhr }); },
