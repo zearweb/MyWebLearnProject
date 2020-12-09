@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二级菜单</title>
+
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #header_menu {
+            background-color: #00ff0099;
+            border-radius: 8px;
+            border-color: #00ff0099;
+            border-style: solid;
+            position: relative;
+            top: 60px;
+            display: none;
+            width: max-content;
+            left: 10%;
+            height: 60px;
+        }
+
+        #header_menu #menu_1_container {
+            width: max-content;
+            height: 60px;
+        }
+
+        #menu_1_item {
+            list-style-type: none;
+            width: 100px;
+            float: left;
+            line-height: 60px;
+            height: 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+
+        #menu_1_item p a {
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        #menu_1_item:hover {
+            background: #00000066;
+        }
+
+        #menu_1_item:hover #menu_2_container {
+            display: inline-block;
+        }
+
+        #menu_2_container {
+            display: none;
+            width: 100px;
+            color: white;
+            font-weight: bold;
+            background: #00000066;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header_menu">
+        <ul id="menu_1_container">
+        </ul>
+    </div>
+
+
+    <script type="module">
+        import { getJson } from "../AJAX/ajax/AjaxIndex.js";
+        const menuUrl = "https://www.imooc.com/api/mall-PC/index/menu/hot";
+        const menuUrl_first = "https://www.imooc.com/api/mall-PC/index/menu";
+
+        const el_menu_container = document.getElementById("menu_1_container");
+        const el_header_menu = document.getElementById("header_menu");
+        getJson(menuUrl_first)
+            .then(({ code, content, xhr }) => {
+                let menuLiHtml = "";
+                for (const menuItem of content.data) {
+                    menuLiHtml += `
+                            <li id="menu_1_item" data-key="${menuItem.key}" data-done="">
+                                <p><a href="#">${menuItem.title}</a></p>
+                                <div id="menu_2_container">
+                                    <p>
+                                        <img src="./loading.gif" alt="loading">
+                                    </p>    
+                                </div>
+                            </li>
+                        `;
+                }
+                el_header_menu.style.display = "inline-block";
+                el_menu_container.innerHTML = menuLiHtml;
+            })
+            .then((data) => {
+                const el_menu_1_item_list = document.querySelectorAll("#menu_1_item");
+
+                for (const item of el_menu_1_item_list) {
+                    item.addEventListener("mouseenter", (ev) => {
+                        if (item.dataset.done === "done") { return };
+
+                        const el_menu_2_container = item.querySelector("#menu_2_container")
+                        getJson(`https://www.imooc.com/api/mall-PC/index/menu/${item.dataset.key}`)
+                            .then(({ code, content, xhr }) => {
+                                el_menu_2_container.dataset.done = "done";
+
+                                let html = "";
+                                for (const item of content.data) {
+                                    html += `<p>${item.title}</p>`;
+                                }
+                                el_menu_2_container.innerHTML = html;
+                            }).catch(({ code, content, xhr }) => {
+                                console.log(content);
+                            })
+                    }, false)
+                }
+            })
+            .catch(({ code, content, xhr }) => {
+                console.log(content);
+            });
+    </script>
+</body>
+
+</html>
