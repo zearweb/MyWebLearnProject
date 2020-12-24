@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media 响应式布局</title>
+
+    <style>
+        #box {
+            width: 80%;
+            margin: 0 auto;
+            background: #ccc;
+            text-align: center;
+        }
+
+        #box>img {
+            width: 100%;
+            display: inline-block;
+            padding: 1.5%;
+            height: 200px;
+        }
+
+        @media (min-width: 440px) {
+            #box>img {
+                width: 40%;
+                display: inline-block;
+                padding: 1.5%;
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 780px) {
+            #box>img {
+                width: 26.66666666666667%;
+                display: inline-block;
+                padding: 1.5%;
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 960px) {
+            #box>img {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img src="http://img.mukewang.com/climg/5a45e49100014e5010601059.jpg" alt="">
+        <img src="http://img.mukewang.com/climg/5a45e53b00012e6d09940789.jpg" alt="">
+        <img src="http://img.mukewang.com/climg/5a45e53c0001d04e09940732.jpg" alt="">
+        <img src="http://img.mukewang.com/climg/5a45e49100014e5010601059.jpg" alt="">
+        <img src="http://img.mukewang.com/climg/5a45e53b00012e6d09940789.jpg" alt="">
+        <img src="http://img.mukewang.com/climg/5a45e53c0001d04e09940732.jpg" alt="">
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    border: 0px solid transparent;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+/* ------------------头部布局------------- */
+#nav-container{
+    display: flex;
+    width: 100%;
+    height: 56px;
+    border-bottom: 1px solid #e8e8e8;
+    justify-content: flex-end;
+    align-items: center;
+}
+/* ------------------logo------------- */
+.nav-logo{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+
+
+/* --------------中屏以下样式----------- */
+
+/* -----菜单logo----- */
+.nav-menu-logo{
+    display: flex;
+    align-items: center;
+    height: 100%;   
+    justify-content: center;
+    background-color: transparent;
+}
+
+.button-toggle{
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    height: 32px;
+    cursor: pointer;
+    outline-style: none;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.button-toggle:hover{
+    background-color: #f1f1f1;
+}
+
+
+.button-toggle-bar{
+    background-color: #343434;
+    height: 4px;
+    width: 26px;
+    display: block;
+    border-radius: 2px;
+}
+
+.button-toggle-bar + .button-toggle-bar
+{
+    margin-top: 4px;
+}
+
+/* 菜单内容 */
+
+.nav-menu-sm-content{
+    height: 0px;
+    top: -1px;
+    overflow: hidden;
+    border-bottom: 1px solid #e8e8e8;
+    transition: height .25s linear 0s;
+}
+
+.nav-menu-sm-content-expanded{
+    height: 0px;
+    top: 0px;
+    height: 241px;
+}
+
+.nav-menu-sm-container{
+    display: flex;
+    font-size: 14px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.nav-menu-sm-container .nav-menu-item{
+    font-weight: bold;
+    height: 40px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+
+
+
+/* --------------中屏以上样式----------- */
+
+.nav-menu-md-container{
+    display: flex;
+    font-size: 14px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-menu-md-container .nav-menu-item{
+    font-weight: bold;
+}
